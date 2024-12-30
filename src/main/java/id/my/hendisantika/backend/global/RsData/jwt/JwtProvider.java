@@ -21,4 +21,9 @@ public class JwtProvider {
     private String secretKeyOrigin;
 
     private SecretKey cachedSecretKey;
+
+    public SecretKey getSecretKey() {
+        if (cachedSecretKey == null) cachedSecretKey = _getSecretKey();
+        return cachedSecretKey;
+    }
 }
