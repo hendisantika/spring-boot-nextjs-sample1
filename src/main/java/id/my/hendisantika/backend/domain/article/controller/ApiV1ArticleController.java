@@ -1,12 +1,16 @@
 package id.my.hendisantika.backend.domain.article.controller;
 
 import id.my.hendisantika.backend.domain.article.dto.ArticleDto;
+import id.my.hendisantika.backend.domain.article.entity.Article;
 import id.my.hendisantika.backend.domain.article.service.ArticleService;
 import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,5 +55,20 @@ public class ApiV1ArticleController {
                 "Post %d does not exist.".formatted(id),
                 null
         ));
+    }
+
+    @PostMapping
+    public RsData<WriteResponse> write(@Valid @RequestBody WriteRequest writeRequest) {
+        Member member = rq.getMember();
+
+        RsData<Article> writeRs = this.articleService.create(member, writeRequest.getSubject(), writeRequest.getContent());
+
+        if (writeRs.isFail()) return (RsData) writeRs;
+
+        return RsData.of(
+                writeRs.getResultCode(),
+                writeRs.getMsg(),
+                new WriteResponse(new ArticleDto(writeRs.getData()))
+        );
     }
 }
