@@ -128,4 +128,7 @@ public class ApiV1ArticleController {
         @NotBlank
         private String content;
     }
+
+    public record WriteResponse(ArticleDto articledto) {
+    }
 }
