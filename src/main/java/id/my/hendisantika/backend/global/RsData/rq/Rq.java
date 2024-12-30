@@ -91,4 +91,8 @@ public class Rq {
     private boolean isLogin() {
         return getUser() != null;
     }
+
+    private boolean isLogout() {
+        return !isLogin();
+    }
 }
