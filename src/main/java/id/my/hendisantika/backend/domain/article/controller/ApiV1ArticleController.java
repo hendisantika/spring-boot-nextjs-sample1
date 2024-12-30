@@ -142,4 +142,7 @@ public class ApiV1ArticleController {
 
     public record ModifyResponse(Article article) {
     }
+
+    public record RemoveResponse(Article article) {
+    }
 }
