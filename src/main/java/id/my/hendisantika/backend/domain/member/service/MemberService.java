@@ -34,4 +34,9 @@ public class MemberService {
         memberRepository.save(member);
         return member;
     }
+
+    public boolean validateToken(String token) {
+        return jwtProvider.verify(token);
+    }
+
 }
