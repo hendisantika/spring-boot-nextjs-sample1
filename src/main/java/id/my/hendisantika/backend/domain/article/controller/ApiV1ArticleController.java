@@ -7,6 +7,7 @@ import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,6 +91,25 @@ public class ApiV1ArticleController {
                 modifyRs.getResultCode(),
                 modifyRs.getMsg(),
                 new ModifyResponse(modifyRs.getData())
+        );
+    }
+
+    @DeleteMapping("/{id}")
+    public RsData<RemoveResponse> remove(@PathVariable("id") Long id) {
+        Optional<Article> optionalArticle = this.articleService.findById(id);
+
+        if (optionalArticle.isEmpty()) return RsData.of(
+                "F-1",
+                "Post %d does not exist.".formatted(id),
+                null
+        );
+
+        RsData<Article> deleteRs = articleService.deleteById(id);
+
+        return RsData.of(
+                deleteRs.getResultCode(),
+                deleteRs.getMsg(),
+                new RemoveResponse(optionalArticle.get())
         );
     }
 }
