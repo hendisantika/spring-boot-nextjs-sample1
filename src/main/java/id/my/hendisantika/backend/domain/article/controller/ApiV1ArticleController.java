@@ -139,4 +139,7 @@ public class ApiV1ArticleController {
         @NotBlank
         private String content;
     }
+
+    public record ModifyResponse(Article article) {
+    }
 }
