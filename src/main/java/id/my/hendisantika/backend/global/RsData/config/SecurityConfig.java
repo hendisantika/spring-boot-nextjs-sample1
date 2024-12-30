@@ -24,7 +24,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class ApiSecurityConfig {
+public class SecurityConfig {
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
 
     @Bean
