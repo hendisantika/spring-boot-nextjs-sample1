@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -24,5 +25,9 @@ public class ArticleService {
 
     public List<Article> getList() {
         return this.articleRepository.findAll();
+    }
+
+    public Optional<Article> getArticle(Long id) {
+        return this.articleRepository.findById(id);
     }
 }
