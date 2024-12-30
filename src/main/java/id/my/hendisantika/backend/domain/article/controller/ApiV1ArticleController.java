@@ -8,6 +8,7 @@ import id.my.hendisantika.backend.global.RsData.rq.Rq;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -69,6 +71,25 @@ public class ApiV1ArticleController {
                 writeRs.getResultCode(),
                 writeRs.getMsg(),
                 new WriteResponse(new ArticleDto(writeRs.getData()))
+        );
+    }
+
+    @PatchMapping("/{id}")
+    public RsData modify(@Valid @RequestBody ModifyRequest modifyRequest, @PathVariable("id") Long id) {
+        Optional<Article> optionalArticle = this.articleService.findById(id);
+
+        if (optionalArticle.isEmpty()) return RsData.of(
+                "F-1",
+                "Post %d does not exist.".formatted(id),
+                null
+        );
+
+        // Check member permissions canModify();
+        RsData<Article> modifyRs = this.articleService.modify(optionalArticle.get(), modifyRequest.getSubject(), modifyRequest.getContent());
+        return RsData.of(
+                modifyRs.getResultCode(),
+                modifyRs.getMsg(),
+                new ModifyResponse(modifyRs.getData())
         );
     }
 }
