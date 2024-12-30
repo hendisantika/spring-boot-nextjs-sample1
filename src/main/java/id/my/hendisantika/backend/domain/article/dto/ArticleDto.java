@@ -1,5 +1,6 @@
 package id.my.hendisantika.backend.domain.article.dto;
 
+import id.my.hendisantika.backend.domain.article.entity.Article;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
