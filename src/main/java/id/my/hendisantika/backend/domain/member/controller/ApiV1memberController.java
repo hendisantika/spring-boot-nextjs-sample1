@@ -2,6 +2,8 @@ package id.my.hendisantika.backend.domain.member.controller;
 
 import id.my.hendisantika.backend.domain.member.service.MemberService;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,4 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiV1memberController {
     private final MemberService memberService;
     private final Rq rq;
+
+    @Getter
+    public static class LoginRequestBody {
+        @NotBlank
+        private String username;
+        @NotBlank
+        private String password;
+    }
 }
