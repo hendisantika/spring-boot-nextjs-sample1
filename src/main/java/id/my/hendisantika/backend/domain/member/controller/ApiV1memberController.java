@@ -55,4 +55,7 @@ public class ApiV1memberController {
 
         return RsData.of(authAndMakeTokensRs.getResultCode(), authAndMakeTokensRs.getMsg(), new LoginResponseBody(new MemberDto(authAndMakeTokensRs.getData().getMember())));
     }
+
+    public record MeResponseBody(MemberDto member) {
+    }
 }
