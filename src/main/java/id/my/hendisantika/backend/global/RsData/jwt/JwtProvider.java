@@ -75,4 +75,15 @@ public class JwtProvider {
 
         return true;
     }
+
+    public Map<String, Object> getClaims(String token) {
+        String body = Jwts.parserBuilder()
+                .setSigningKey(getSecretKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("body", String.class);
+
+        return Util.toMap(body);
+    }
 }
