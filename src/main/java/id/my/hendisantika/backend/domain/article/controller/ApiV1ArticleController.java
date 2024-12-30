@@ -112,4 +112,8 @@ public class ApiV1ArticleController {
                 new RemoveResponse(optionalArticle.get())
         );
     }
+
+    public record ArticlesResponse(List<ArticleDto> articles) {
+    }
+
 }
