@@ -1,5 +1,8 @@
 package id.my.hendisantika.backend.global.RsData.init;
 
+import id.my.hendisantika.backend.domain.article.service.ArticleService;
+import id.my.hendisantika.backend.domain.member.entity.Member;
+import id.my.hendisantika.backend.domain.member.service.MemberService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

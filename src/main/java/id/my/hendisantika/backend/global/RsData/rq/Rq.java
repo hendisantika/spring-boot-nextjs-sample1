@@ -86,7 +86,7 @@ public class Rq {
         return Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(context -> context.getAuthentication())
                 .filter(authentication -> authentication.getPrincipal() instanceof SecurityUser)
-                .map(authentication -> authentication.getPrincipal())
+                .map(authentication -> (SecurityUser) authentication.getPrincipal())
                 .orElse(null);
     }
 

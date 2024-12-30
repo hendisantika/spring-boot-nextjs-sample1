@@ -1,5 +1,6 @@
 package id.my.hendisantika.backend.global.RsData.config;
 
+import id.my.hendisantika.backend.domain.member.service.MemberService;
 import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
 import jakarta.servlet.FilterChain;

@@ -1,5 +1,6 @@
 package id.my.hendisantika.backend.domain.article.entity;
 
+import id.my.hendisantika.backend.domain.member.entity.Member;
 import id.my.hendisantika.backend.global.RsData.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

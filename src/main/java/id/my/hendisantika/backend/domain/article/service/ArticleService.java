@@ -2,6 +2,7 @@ package id.my.hendisantika.backend.domain.article.service;
 
 import id.my.hendisantika.backend.domain.article.entity.Article;
 import id.my.hendisantika.backend.domain.article.repository.ArticleRepository;
+import id.my.hendisantika.backend.domain.member.entity.Member;
 import id.my.hendisantika.backend.global.RsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

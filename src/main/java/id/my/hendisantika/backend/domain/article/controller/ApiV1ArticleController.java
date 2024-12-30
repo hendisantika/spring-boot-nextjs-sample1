@@ -3,6 +3,7 @@ package id.my.hendisantika.backend.domain.article.controller;
 import id.my.hendisantika.backend.domain.article.dto.ArticleDto;
 import id.my.hendisantika.backend.domain.article.entity.Article;
 import id.my.hendisantika.backend.domain.article.service.ArticleService;
+import id.my.hendisantika.backend.domain.member.entity.Member;
 import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
 import jakarta.validation.Valid;
