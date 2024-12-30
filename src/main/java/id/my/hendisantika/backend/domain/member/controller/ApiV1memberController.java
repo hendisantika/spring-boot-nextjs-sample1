@@ -1,8 +1,10 @@
 package id.my.hendisantika.backend.domain.member.controller;
 
+import id.my.hendisantika.backend.domain.member.dto.MemberDto;
 import id.my.hendisantika.backend.domain.member.service.MemberService;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +33,11 @@ public class ApiV1memberController {
         private String username;
         @NotBlank
         private String password;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class LoginResponseBody {
+        private MemberDto memberDto;
     }
 }
