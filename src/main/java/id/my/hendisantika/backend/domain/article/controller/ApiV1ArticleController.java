@@ -6,6 +6,7 @@ import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +37,19 @@ public class ApiV1ArticleController {
                 .map(article -> new ArticleDto(article))
                 .toList();
 
-        return RsData.of("S-1", "성공", new ArticlesResponse(articleDtoList));
+        return RsData.of("S-1", "success", new ArticlesResponse(articleDtoList));
+    }
+
+    @GetMapping("/{id}")
+    public RsData<ArticleResponse> getArticle(@PathVariable("id") Long id) {
+        return articleService.getArticle(id).map(article -> RsData.of(
+                "S-1",
+                "success",
+                new ArticleResponse(new ArticleDto(article))
+        )).orElseGet(() -> RsData.of(
+                "F-1",
+                "Post %d does not exist.".formatted(id),
+                null
+        ));
     }
 }
