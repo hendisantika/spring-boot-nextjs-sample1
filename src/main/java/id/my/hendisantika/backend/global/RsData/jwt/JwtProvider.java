@@ -1,5 +1,7 @@
 package id.my.hendisantika.backend.global.RsData.jwt;
 
+import id.my.hendisantika.backend.domain.member.entity.Member;
+import id.my.hendisantika.backend.global.RsData.util.Util;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
