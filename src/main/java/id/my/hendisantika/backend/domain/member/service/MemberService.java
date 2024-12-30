@@ -5,6 +5,8 @@ import id.my.hendisantika.backend.domain.member.repository.MemberRepository;
 import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.config.SecurityUser;
 import id.my.hendisantika.backend.global.RsData.jwt.JwtProvider;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -61,5 +63,13 @@ public class MemberService {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         return new SecurityUser(id, username, "", authorities);
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public static class AuthAndMakeTokensResponseBody {
+        private Member member;
+        private String accessToken;
+        private String refreshToken;
     }
 }
