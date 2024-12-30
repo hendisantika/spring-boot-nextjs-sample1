@@ -1,9 +1,11 @@
 package id.my.hendisantika.backend.global.RsData.jwt;
 
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.util.Base64;
 
 /**
  * Created by IntelliJ IDEA.
@@ -26,4 +28,10 @@ public class JwtProvider {
         if (cachedSecretKey == null) cachedSecretKey = _getSecretKey();
         return cachedSecretKey;
     }
+
+    private SecretKey _getSecretKey() {
+        String keyBase64Encoded = Base64.getEncoder().encodeToString(secretKeyOrigin.getBytes());
+        return Keys.hmacShaKeyFor(keyBase64Encoded.getBytes());
+    }
+
 }
