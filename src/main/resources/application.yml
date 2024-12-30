@@ -17,3 +17,16 @@ logging:
     id.my.hendisantika.backend: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
+
+springdoc:
+  version: 1.0.0
+  swagger-ui:
+    path: /swagger-ui
+  api-docs:
+    path: /v3/api-doc
+
+#logging:
+#  level:
+#    root: DEBUG
+application-description: '@project.description@'
+application-version: '@project.version@'
