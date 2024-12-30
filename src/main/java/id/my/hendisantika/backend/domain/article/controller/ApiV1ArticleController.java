@@ -6,6 +6,8 @@ import id.my.hendisantika.backend.domain.article.service.ArticleService;
 import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,5 +119,13 @@ public class ApiV1ArticleController {
     }
 
     public record ArticleResponse(ArticleDto article) {
+    }
+
+    @Data
+    public static class WriteRequest {
+        @NotBlank
+        private String subject;
+        @NotBlank
+        private String content;
     }
 }
