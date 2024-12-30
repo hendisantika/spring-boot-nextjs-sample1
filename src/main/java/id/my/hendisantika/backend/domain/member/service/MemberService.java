@@ -2,6 +2,7 @@ package id.my.hendisantika.backend.domain.member.service;
 
 import id.my.hendisantika.backend.domain.member.entity.Member;
 import id.my.hendisantika.backend.domain.member.repository.MemberRepository;
+import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,4 +40,10 @@ public class MemberService {
         return jwtProvider.verify(token);
     }
 
+    public RsData<String> refreshAccessToken(String refreshToken) {
+        Member member = memberRepository.findByRefreshToken(refreshToken).orElseThrow(() -> new RuntimeException("Refresh token does not exist."));
+        String accessToken = jwtProvider.genAccessToken(member);
+
+        return RsData.of("200-1", "Token renewal successful", accessToken);
+    }
 }
