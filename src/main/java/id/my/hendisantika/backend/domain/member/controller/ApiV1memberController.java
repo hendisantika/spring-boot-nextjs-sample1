@@ -1,6 +1,7 @@
 package id.my.hendisantika.backend.domain.member.controller;
 
 import id.my.hendisantika.backend.domain.member.dto.MemberDto;
+import id.my.hendisantika.backend.domain.member.entity.Member;
 import id.my.hendisantika.backend.domain.member.service.MemberService;
 import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,5 +59,16 @@ public class ApiV1memberController {
     }
 
     public record MeResponseBody(MemberDto member) {
+    }
+
+    @GetMapping("/me")
+    public RsData<MeResponseBody> me() {
+        Member member = rq.getMember();
+
+        return RsData.of(
+                "200",
+                "My information search was successful",
+                new MeResponseBody(new MemberDto(member))
+        );
     }
 }

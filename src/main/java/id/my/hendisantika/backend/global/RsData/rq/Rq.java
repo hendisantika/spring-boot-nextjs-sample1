@@ -1,5 +1,7 @@
 package id.my.hendisantika.backend.global.RsData.rq;
 
+import id.my.hendisantika.backend.domain.member.entity.Member;
+import id.my.hendisantika.backend.global.RsData.config.SecurityUser;
 import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
