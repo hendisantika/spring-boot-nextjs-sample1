@@ -53,4 +53,15 @@ public class ArticleService {
         return articleRepository.findById(id);
     }
 
+    public RsData<Article> modify(Article article, String subject, String content) {
+        article.setSubject(subject);
+        article.setContent(content);
+        articleRepository.save(article);
+
+        return RsData.of(
+                "S-4",
+                "Post %d has been edited.".formatted(article.getId()),
+                article
+        );
+    }
 }
