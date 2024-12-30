@@ -87,4 +87,8 @@ public class Rq {
                 .map(authentication -> authentication.getPrincipal())
                 .orElse(null);
     }
+
+    private boolean isLogin() {
+        return getUser() != null;
+    }
 }
