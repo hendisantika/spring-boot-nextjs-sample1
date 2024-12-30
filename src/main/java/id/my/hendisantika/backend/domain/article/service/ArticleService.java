@@ -1,8 +1,11 @@
 package id.my.hendisantika.backend.domain.article.service;
 
+import id.my.hendisantika.backend.domain.article.entity.Article;
 import id.my.hendisantika.backend.domain.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,4 +22,7 @@ import org.springframework.stereotype.Service;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
+    public List<Article> getList() {
+        return this.articleRepository.findAll();
+    }
 }
