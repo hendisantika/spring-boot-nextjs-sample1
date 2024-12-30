@@ -3,9 +3,15 @@ package id.my.hendisantika.backend.domain.member.service;
 import id.my.hendisantika.backend.domain.member.entity.Member;
 import id.my.hendisantika.backend.domain.member.repository.MemberRepository;
 import id.my.hendisantika.backend.global.RsData.RsData;
+import id.my.hendisantika.backend.global.RsData.config.SecurityUser;
 import id.my.hendisantika.backend.global.RsData.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -45,5 +51,15 @@ public class MemberService {
         String accessToken = jwtProvider.genAccessToken(member);
 
         return RsData.of("200-1", "Token renewal successful", accessToken);
+    }
+
+    public SecurityUser getUserFromAccessToken(String accessToken) {
+        Map<String, Object> payloadBody = jwtProvider.getClaims(accessToken);
+
+        long id = (int) payloadBody.get("id");
+        String username = (String) payloadBody.get("username");
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        return new SecurityUser(id, username, "", authorities);
     }
 }
