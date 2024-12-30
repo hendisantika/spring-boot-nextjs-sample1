@@ -116,4 +116,6 @@ public class ApiV1ArticleController {
     public record ArticlesResponse(List<ArticleDto> articles) {
     }
 
+    public record ArticleResponse(ArticleDto article) {
+    }
 }
