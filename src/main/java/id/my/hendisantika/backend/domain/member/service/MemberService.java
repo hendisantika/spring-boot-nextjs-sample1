@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +72,17 @@ public class MemberService {
         private Member member;
         private String accessToken;
         private String refreshToken;
+    }
+
+    @Transactional
+    public RsData<AuthAndMakeTokensResponseBody> authAndMakeTokens(String username, String password) {
+        Member member = this.memberRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("The user does not exist."));
+
+        // Generate AccessToken
+        String accessToken = jwtProvider.genAccessToken(member);
+        // Create RefreshToken
+        String refreshToken = jwtProvider.genRefreshToken(member);
+
+        return RsData.of("200-1", "Login successful", new AuthAndMakeTokensResponseBody(member, accessToken, refreshToken));
     }
 }
