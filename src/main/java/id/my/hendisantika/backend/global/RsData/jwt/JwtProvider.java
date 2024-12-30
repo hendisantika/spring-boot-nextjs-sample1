@@ -1,11 +1,15 @@
 package id.my.hendisantika.backend.global.RsData.jwt;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -42,4 +46,19 @@ public class JwtProvider {
         return genToken(member, 60 * 10);
     }
 
+    public String genToken(Member member, int seconds) {
+        Map<String, Object> claims = new HashMap<>();
+
+        claims.put("id", member.getId());
+        claims.put("username", member.getUsername());
+
+        long now = new Date().getTime();
+        Date accessTokenExpiresIn = new Date(now + 1000L * seconds);
+
+        return Jwts.builder()
+                .claim("body", Util.json.toStr(claims))
+                .setExpiration(accessTokenExpiresIn)
+                .signWith(getSecretKey(), SignatureAlgorithm.HS512)
+                .compact();
+    }
 }
