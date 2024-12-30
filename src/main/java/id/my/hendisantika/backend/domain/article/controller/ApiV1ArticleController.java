@@ -131,4 +131,12 @@ public class ApiV1ArticleController {
 
     public record WriteResponse(ArticleDto articledto) {
     }
+
+    @Data
+    public static class ModifyRequest {
+        @NotBlank
+        private String subject;
+        @NotBlank
+        private String content;
+    }
 }
