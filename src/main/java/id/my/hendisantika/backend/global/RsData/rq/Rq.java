@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -77,5 +78,13 @@ public class Rq {
 
     public void setLogin(SecurityUser securityUser) {
         SecurityContextHolder.getContext().setAuthentication(securityUser.genAuthentication());
+    }
+
+    private SecurityUser getUser() {
+        return Optional.ofNullable(SecurityContextHolder.getContext())
+                .map(context -> context.getAuthentication())
+                .filter(authentication -> authentication.getPrincipal() instanceof SecurityUser)
+                .map(authentication -> authentication.getPrincipal())
+                .orElse(null);
     }
 }
