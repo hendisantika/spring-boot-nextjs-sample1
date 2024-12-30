@@ -61,4 +61,15 @@ public class Rq {
                 .build();
         resp.addHeader("Set-Cookie", cookie.toString());
     }
+
+
+    public Member getMember() {
+        if (isLogout()) return null;
+
+        if (member == null) {
+            member = entityManager.getReference(Member.class, getUser().getId());
+        }
+
+        return member;
+    }
 }
