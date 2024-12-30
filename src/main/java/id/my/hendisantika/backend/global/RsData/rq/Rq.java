@@ -5,6 +5,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -37,5 +38,16 @@ public class Rq {
                 .findFirst()
                 .map(Cookie::getValue)
                 .orElse("");
+    }
+
+    public void setCrossDomainCookie(String tokenName, String token) {
+        ResponseCookie cookie = ResponseCookie.from(tokenName, token)
+                .path("/")
+                .sameSite("None")
+                .secure(true)
+                .httpOnly(true)
+                .build();
+
+        resp.addHeader("Set-Cookie", cookie.toString());
     }
 }
