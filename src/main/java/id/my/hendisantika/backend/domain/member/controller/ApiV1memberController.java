@@ -2,11 +2,15 @@ package id.my.hendisantika.backend.domain.member.controller;
 
 import id.my.hendisantika.backend.domain.member.dto.MemberDto;
 import id.my.hendisantika.backend.domain.member.service.MemberService;
+import id.my.hendisantika.backend.global.RsData.RsData;
 import id.my.hendisantika.backend.global.RsData.rq.Rq;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,5 +43,16 @@ public class ApiV1memberController {
     @AllArgsConstructor
     public static class LoginResponseBody {
         private MemberDto memberDto;
+    }
+
+    @PostMapping("/login")
+    public RsData<LoginResponseBody> login(@Valid @RequestBody LoginRequestBody loginRequestBody) {
+        RsData<MemberService.AuthAndMakeTokensResponseBody> authAndMakeTokensRs = memberService.authAndMakeTokens(loginRequestBody.getUsername(), loginRequestBody.getPassword());
+
+        // Insert accessToken and refreshToken tokens into cookies
+        rq.setCrossDomainCookie("accessToken", authAndMakeTokensRs.getData().getAccessToken());
+        rq.setCrossDomainCookie("refreshToken", authAndMakeTokensRs.getData().getRefreshToken());
+
+        return RsData.of(authAndMakeTokensRs.getResultCode(), authAndMakeTokensRs.getMsg(), new LoginResponseBody(new MemberDto(authAndMakeTokensRs.getData().getMember())));
     }
 }
