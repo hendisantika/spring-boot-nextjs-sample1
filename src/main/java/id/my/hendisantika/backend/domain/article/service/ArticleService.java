@@ -2,8 +2,10 @@ package id.my.hendisantika.backend.domain.article.service;
 
 import id.my.hendisantika.backend.domain.article.entity.Article;
 import id.my.hendisantika.backend.domain.article.repository.ArticleRepository;
+import id.my.hendisantika.backend.global.RsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,5 +31,21 @@ public class ArticleService {
 
     public Optional<Article> getArticle(Long id) {
         return this.articleRepository.findById(id);
+    }
+
+    @Transactional
+    public RsData<Article> create(Member member, String subject, String content) {
+        Article article = Article.builder()
+                .author(member)
+                .subject(subject)
+                .content(content)
+                .build();
+        this.articleRepository.save(article);
+
+        return RsData.of(
+                "S-3",
+                "The post has been created.",
+                article
+        );
     }
 }
