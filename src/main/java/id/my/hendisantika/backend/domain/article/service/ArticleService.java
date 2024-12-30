@@ -64,4 +64,14 @@ public class ArticleService {
                 article
         );
     }
+
+    public RsData<Article> deleteById(Long id) {
+        articleRepository.deleteById(id);
+
+        return RsData.of(
+                "S-5",
+                "Post %d has been deleted.".formatted(id),
+                null
+        );
+    }
 }
