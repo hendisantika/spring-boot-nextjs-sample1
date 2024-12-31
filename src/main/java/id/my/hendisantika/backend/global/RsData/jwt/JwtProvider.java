@@ -68,7 +68,7 @@ public class JwtProvider {
 
     public boolean verify(String token) {
         try {
-            Jwts.parserBuilder()
+            Jwts.parser()
                     .setSigningKey(getSecretKey())
                     .build()
                     .parseClaimsJws(token);
@@ -80,7 +80,7 @@ public class JwtProvider {
     }
 
     public Map<String, Object> getClaims(String token) {
-        String body = Jwts.parserBuilder()
+        String body = Jwts.parser()
                 .setSigningKey(getSecretKey())
                 .build()
                 .parseClaimsJws(token)
