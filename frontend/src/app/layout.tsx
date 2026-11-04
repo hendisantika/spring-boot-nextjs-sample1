@@ -4,8 +4,8 @@ import type {Metadata} from 'next'
 import {Fraunces, Inter} from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({subsets: ['latin'], variable: '--font-sans'})
-const fraunces = Fraunces({subsets: ['latin'], variable: '--font-display'})
+const inter = Inter({subsets: ['latin'], variable: '--font-inter'})
+const fraunces = Fraunces({subsets: ['latin'], variable: '--font-fraunces'})
 
 export const metadata: Metadata = {
     title: 'Bulletin — Spring Boot × Next.js',
@@ -27,7 +27,7 @@ export default function RootLayout({
         <footer className="border-t border-stone-200/70">
             <div
                 className="mx-auto flex max-w-5xl flex-col gap-1 px-4 py-6 text-xs text-stone-500 sm:flex-row sm:justify-between sm:px-6">
-                <p>Bulletin · Spring Boot 4 on JDK 25 + Next.js 15</p>
+                <p>Bulletin · Spring Boot 4 on JDK 25 + Next.js 16</p>
                 <p>
                     Made by{' '}
                     <a href="https://s.id/hendisantika" className="font-medium text-stone-700 hover:text-accent-600">

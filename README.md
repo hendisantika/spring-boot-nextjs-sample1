@@ -3,7 +3,7 @@
 [![Java CI with Gradle](https://github.com/hendisantika/spring-boot-nextjs-sample1/actions/workflows/gradle.yml/badge.svg)](https://github.com/hendisantika/spring-boot-nextjs-sample1/actions/workflows/gradle.yml)
 ![Java](https://img.shields.io/badge/Java-25-orange?logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1-6DB33F?logo=springboot)
-![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=nextdotjs)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
 
 Sample full-stack app: a **Spring Boot** REST API (JWT auth, articles & members) with a **Next.js** frontend.
 
@@ -35,13 +35,13 @@ Sample full-stack app: a **Spring Boot** REST API (JWT auth, articles & members)
 | API docs | springdoc-openapi (Swagger UI)                                              |
 | Database | H2 (default), MySQL / MariaDB via Docker Compose                            |
 | Build    | Gradle (Kotlin DSL) with wrapper, Java toolchain 25                         |
-| Frontend | Next.js 15, React 19, TanStack Query, Axios, Tailwind CSS (Fraunces + Inter) |
+| Frontend | Next.js 16, React 19, TanStack Query, Axios, Tailwind CSS 4 (Fraunces + Inter) |
 | CI       | GitHub Actions (build + test on Temurin JDK 25, dependency graph submission)|
 
 ## Prerequisites
 
 - JDK 25 (the Gradle toolchain targets Java 25)
-- Node.js 20+ and npm (for the frontend)
+- Node.js 20.19+ (22 LTS or newer recommended) and npm (for the frontend)
 - Docker (optional, for MySQL/MariaDB)
 
 ## Project Structure
