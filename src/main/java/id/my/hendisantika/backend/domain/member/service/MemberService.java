@@ -9,12 +9,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,6 +33,7 @@ import java.util.Map;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final JwtProvider jwtProvider;
+    private final PasswordEncoder passwordEncoder;
 
     public Member join(String username, String password, String email) {
         Member member = Member.builder()
@@ -76,7 +79,14 @@ public class MemberService {
 
     @Transactional
     public RsData<AuthAndMakeTokensResponseBody> authAndMakeTokens(String username, String password) {
-        Member member = this.memberRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("The user does not exist."));
+        Optional<Member> optionalMember = this.memberRepository.findByUsername(username);
+
+        // Same message for unknown user and wrong password, so usernames cannot be enumerated.
+        if (optionalMember.isEmpty() || !passwordEncoder.matches(password, optionalMember.get().getPassword())) {
+            return RsData.of("401-1", "Invalid username or password.");
+        }
+
+        Member member = optionalMember.get();
 
         // Generate AccessToken
         String accessToken = jwtProvider.genAccessToken(member);

@@ -10,6 +10,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,14 +50,19 @@ public class ApiV1memberController {
     }
 
     @PostMapping("/login")
-    public RsData<LoginResponseBody> login(@Valid @RequestBody LoginRequestBody loginRequestBody) {
+    public ResponseEntity<RsData<LoginResponseBody>> login(@Valid @RequestBody LoginRequestBody loginRequestBody) {
         RsData<MemberService.AuthAndMakeTokensResponseBody> authAndMakeTokensRs = memberService.authAndMakeTokens(loginRequestBody.getUsername(), loginRequestBody.getPassword());
+
+        if (authAndMakeTokensRs.getData() == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(RsData.of(authAndMakeTokensRs.getResultCode(), authAndMakeTokensRs.getMsg()));
+        }
 
         // Insert accessToken and refreshToken tokens into cookies
         rq.setCrossDomainCookie("accessToken", authAndMakeTokensRs.getData().getAccessToken());
         rq.setCrossDomainCookie("refreshToken", authAndMakeTokensRs.getData().getRefreshToken());
 
-        return RsData.of(authAndMakeTokensRs.getResultCode(), authAndMakeTokensRs.getMsg(), new LoginResponseBody(new MemberDto(authAndMakeTokensRs.getData().getMember())));
+        return ResponseEntity.ok(RsData.of(authAndMakeTokensRs.getResultCode(), authAndMakeTokensRs.getMsg(), new LoginResponseBody(new MemberDto(authAndMakeTokensRs.getData().getMember()))));
     }
 
     public record MeResponseBody(MemberDto member) {

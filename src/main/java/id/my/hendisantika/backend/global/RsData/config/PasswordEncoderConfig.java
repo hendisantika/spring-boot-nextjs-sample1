@@ -1,0 +1,26 @@
+package id.my.hendisantika.backend.global.RsData.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+/**
+ * Created by IntelliJ IDEA.
+ * Project : backend
+ * User: hendisantika
+ * Email: hendisantika@gmail.com
+ * Telegram : @hendisantika34
+ * Link : s.id/hendisantika
+ * Date: 05/11/26
+ * Time: 06.38
+ */
+// Kept separate from SecurityConfig to avoid the cycle SecurityConfig -> JwtAuthorizationFilter -> MemberService.
+@Configuration
+public class PasswordEncoderConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
