@@ -7,6 +7,25 @@
 
 Sample full-stack app: a **Spring Boot** REST API (JWT auth, articles & members) with a **Next.js** frontend.
 
+## Screenshots
+
+| Home | Notice board |
+|------|--------------|
+| ![Home](docs/images/home.png) | ![Notice board](docs/images/article-list.png) |
+
+| Article detail | Login |
+|----------------|-------|
+| ![Article detail](docs/images/article-detail.png) | ![Login](docs/images/login.png) |
+
+| Member profile | Swagger UI |
+|----------------|------------|
+| ![Member profile](docs/images/profile.png) | ![Swagger UI](docs/images/swagger-ui.png) |
+
+<p align="center">
+  <img src="docs/images/mobile-board.png" alt="Notice board on mobile" width="300"/>
+  <br/><em>Responsive layout on mobile</em>
+</p>
+
 ## Tech Stack
 
 | Layer    | Technology                                                                 |
@@ -16,7 +35,7 @@ Sample full-stack app: a **Spring Boot** REST API (JWT auth, articles & members)
 | API docs | springdoc-openapi (Swagger UI)                                              |
 | Database | H2 (default), MySQL / MariaDB via Docker Compose                            |
 | Build    | Gradle (Kotlin DSL) with wrapper, Java toolchain 25                         |
-| Frontend | Next.js 15, React 19, TanStack Query, Axios, Tailwind CSS                   |
+| Frontend | Next.js 15, React 19, TanStack Query, Axios, Tailwind CSS (Fraunces + Inter) |
 | CI       | GitHub Actions (build + test on Temurin JDK 25, dependency graph submission)|
 
 ## Prerequisites
@@ -68,7 +87,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000`. Demo accounts seeded on startup: `user1`, `user2`, `admin` (password `1234`).
 
 ## API Endpoints
 
