@@ -19,13 +19,17 @@ import java.time.LocalDateTime;
 public class ArticleDto {
     private final long id;
     private final String subject;
+    private final String content;
     private final String author;
     private final LocalDateTime createdDate;
+    private final LocalDateTime modifiedDate;
 
     public ArticleDto(Article article) {
         this.id = article.getId();
         this.subject = article.getSubject();
+        this.content = article.getContent();
         this.author = article.getAuthor().getUsername();
         this.createdDate = article.getCreatedDate();
+        this.modifiedDate = article.getModifiedDate();
     }
 }
