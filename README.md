@@ -1,6 +1,7 @@
 # spring-boot-nextjs-sample1
 
 [![Java CI with Gradle](https://github.com/hendisantika/spring-boot-nextjs-sample1/actions/workflows/gradle.yml/badge.svg)](https://github.com/hendisantika/spring-boot-nextjs-sample1/actions/workflows/gradle.yml)
+[![Frontend CI](https://github.com/hendisantika/spring-boot-nextjs-sample1/actions/workflows/frontend.yml/badge.svg)](https://github.com/hendisantika/spring-boot-nextjs-sample1/actions/workflows/frontend.yml)
 ![Java](https://img.shields.io/badge/Java-25-orange?logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1-6DB33F?logo=springboot)
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs)
@@ -36,7 +37,7 @@ Sample full-stack app: a **Spring Boot** REST API (JWT auth, articles & members)
 | Database | H2 (default), MySQL / MariaDB via Docker Compose                            |
 | Build    | Gradle (Kotlin DSL) with wrapper, Java toolchain 25                         |
 | Frontend | Next.js 16, React 19, TanStack Query, Axios, Tailwind CSS 4 (Fraunces + Inter) |
-| CI       | GitHub Actions (build + test on Temurin JDK 25, dependency graph submission)|
+| CI       | GitHub Actions: backend build + test on JDK 25, frontend lint + build on Node 24 |
 
 ## Prerequisites
 
@@ -107,6 +108,7 @@ Login sets `accessToken` / `refreshToken` cookies (JWT) that are read by `JwtAut
 ## CI/CD & Dependency Updates
 
 - **GitHub Actions** (`.github/workflows/gradle.yml`): builds and tests on Temurin JDK 25 for pushes and PRs to `main`, and submits the Gradle dependency graph for Dependabot alerts.
+- **Frontend CI** (`.github/workflows/frontend.yml`): runs `npm ci`, `npm run lint` and `npm run build` on Node.js 24 for changes under `frontend/`, so dependency bumps that break the app fail before merge.
 - **Dependabot** (`.github/dependabot.yml`):
   - Gradle: daily, grouped (Spring Boot, JJWT, springdoc, JDBC drivers, minor/patch)
   - npm (`/frontend`): weekly, grouped (Next.js/React, TanStack, dev tooling)
