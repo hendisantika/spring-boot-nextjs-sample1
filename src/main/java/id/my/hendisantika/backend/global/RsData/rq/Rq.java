@@ -37,6 +37,10 @@ public class Rq {
     public String getCookie(String name) {
         Cookie[] cookies = req.getCookies();
 
+        if (cookies == null) {
+            return "";
+        }
+
         return Arrays.stream(cookies)
                 .filter(cookie -> cookie.getName().equals(name))
                 .findFirst()
